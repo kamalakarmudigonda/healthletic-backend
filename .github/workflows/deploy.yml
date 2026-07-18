@@ -54,7 +54,6 @@ jobs:
           image-ref: mudigonda/healthletic-backend:${{ env.IMAGE_TAG }}
           format: table
           exit-code: 0
-
       - name: Setup Helm
         uses: azure/setup-helm@v4
 
@@ -78,11 +77,3 @@ jobs:
         if: failure()
         run: |
           helm rollback backend
-
-      - name: Post Trivy Security Scan
-        if: always()
-        uses: aquasecurity/trivy-action@master
-        with:
-          image-ref: mudigonda/healthletic-backend:${{ env.IMAGE_TAG }}
-          format: table
-          exit-code: 0
